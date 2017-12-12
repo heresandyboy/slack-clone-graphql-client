@@ -16,11 +16,13 @@ module.exports = {
         "mocha":   true
     },   
     "extends": [
+        "airbnb-base", 
         "eslint:recommended", 
         "plugin:react/recommended"
-    ],
-    // "extends": "airbnb-base",      
+    ],    
     "rules": {
+        "react/display-name": 0,
+        "react/jsx-uses-vars": [2],
         "semi": [2, "never"],
         "linebreak-style": ["error", "windows"],
         // "indent": [2, 4],

@@ -1,11 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Routes from './routes'
-import registerServiceWorker from './registerServiceWorker'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-const App = (
-    <Routes />
+import Home from './Home'
+
+export default () => (
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact component={Home} />
+    </Switch>
+  </BrowserRouter>
 )
-
-ReactDOM.render(App, document.getElementById('root'))
-registerServiceWorker()
