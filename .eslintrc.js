@@ -14,12 +14,13 @@ module.exports = {
         "browser": true,
         "node":    true,
         "mocha":   true
-    },   
+    },
+    "parser": "babel-eslint",
     "extends": [
-        "airbnb-base", 
-        "eslint:recommended", 
+        "airbnb-base",
+        "eslint:recommended",
         "plugin:react/recommended"
-    ],    
+    ],
     "rules": {
         "react/display-name": 0,
         "react/jsx-uses-vars": [2],
