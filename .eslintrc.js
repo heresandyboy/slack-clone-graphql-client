@@ -2,6 +2,7 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -14,8 +15,7 @@ module.exports = {
         "browser": true,
         "node":    true,
         "mocha":   true
-    },
-    "parser": "babel-eslint",
+    },    
     "extends": [
         "airbnb-base",
         "eslint:recommended",
@@ -28,7 +28,7 @@ module.exports = {
         "linebreak-style": ["error", "windows"],
         // "indent": [2, 4],
         "eol-last": ["error", "never"],
-        // "function-paren-newline": ["error", "multiline"],
+        // "function-paren-newline": ["error", "multiline"], 
         "no-use-before-define": ["error", {
             "functions": false,
             "classes": true
