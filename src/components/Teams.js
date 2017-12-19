@@ -1,5 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const TeamWrapper = styled.div`
   grid-column: 1;
@@ -33,10 +35,23 @@ const TeamListItem = styled.li`
   }
 `
 
-const team = ({ id, letter }) => <TeamListItem key={`team-${id}`}>{letter}</TeamListItem>
+const team = ({ id, letter }) => (
+  <Link key={`link-team-${id}`} to={`/view-team/${id}`}>
+   <TeamListItem key={`team-${id}`}>{letter}</TeamListItem>
+   </Link>
+)
+team.propTypes = {
+  id: PropTypes.number.isRequired,
+  letter: PropTypes.string.isRequired
+}
 
-export default ({ teams }) => (
+const Teams = ({ teams }) => (
     <TeamWrapper>
         <TeamList>{teams.map(team)}</TeamList>
     </TeamWrapper>
 )
+Teams.propTypes = {
+  teams: PropTypes.array.isRequired
+}
+
+export default Teams

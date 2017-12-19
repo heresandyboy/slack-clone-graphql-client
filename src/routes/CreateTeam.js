@@ -36,10 +36,10 @@ class CreateTeam extends Component {
 
     console.log(response)
 
-    const { ok, errors } = response.data.createTeam
+    const { ok, errors, team } = response.data.createTeam
 
     if (ok) {
-      this.props.history.push('/')
+      this.props.history.push(`/view-team/${team.id}`)
     } else {
       const err = {}
       errors.forEach(({ path, message }) => {
@@ -55,7 +55,7 @@ class CreateTeam extends Component {
     this[name] = value
   };
 
-  render() {
+  render () {
     const { name, errors: { nameError } } = this
 
     const errorList = []
@@ -74,7 +74,7 @@ class CreateTeam extends Component {
           <Button onClick={this.onSubmit}>Submit</Button>
         </Form>
         {errorList.length ? (
-          <Message error header="There are some errors with your submission" list={errorList} />
+          <Message error header="There was some errors with your submission" list={errorList} />
         ) : null}
       </Container>
     )
@@ -85,6 +85,9 @@ const createTeamMutation = gql`
   mutation($name: String!) {
     createTeam(name: $name) {
       ok
+      team {
+        id
+      }
       errors {
         path
         message
