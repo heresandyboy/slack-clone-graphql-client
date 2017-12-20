@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import decode from 'jwt-decode'
 
 import Channels from '../components/Channels'
 import Teams from '../components/Teams'
 import AddChannelModal from '../components/AddChannelModal'
+import InvitePeopleModal from '../components/InvitePeopleModal'
 
-class Sidebar extends Component {
+export default class Sidebar extends React.Component {
   state = {
     openAddChannelModal: false,
+    openInvitePeopleModal: false,
   };
 
   handleCloseAddChannelModal = () => {
@@ -17,11 +19,21 @@ class Sidebar extends Component {
 
   handleAddChannelClick = () => {
     this.setState({ openAddChannelModal: true })
+    // go to channel
+  };
+
+  handleInvitePeopleClick = () => {
+    this.setState({ openInvitePeopleModal: true })
+  };
+
+  handleCloseInvitePeopleModal = () => {
+    this.setState({ openInvitePeopleModal: false })    
   };
 
   render() {
-    const { teams, team } = this.props  
- 
+    const { teams, team } = this.props
+    const { openInvitePeopleModal, openAddChannelModal } = this.state
+
     let username = ''
     try {
       const token = localStorage.getItem('token')
@@ -33,10 +45,7 @@ class Sidebar extends Component {
     }
 
     return [
-      <Teams
-        key="team-sidebar"
-        teams={teams}
-      />,
+      <Teams key="team-sidebar" teams={teams} />,
       <Channels
         key="channels-sidebar"
         teamName={team.name}
@@ -45,12 +54,19 @@ class Sidebar extends Component {
         channels={team.channels}
         users={[{ id: 1, name: 'slackbot' }, { id: 2, name: 'user1' }]}
         onAddChannelClick={this.handleAddChannelClick}
+        onInvitePeopleClick={this.handleInvitePeopleClick}
       />,
       <AddChannelModal
         teamId={team.id}
         onClose={this.handleCloseAddChannelModal}
-        open={this.state.openAddChannelModal}
+        open={openAddChannelModal}
         key="sidebar-add-channel-modal"
+      />,
+      <InvitePeopleModal
+        teamId={team.id}
+        onClose={this.handleCloseInvitePeopleModal}
+        open={openInvitePeopleModal}
+        key="invite-people-modal"
       />,
     ]
   }
@@ -59,5 +75,3 @@ Sidebar.propTypes = {
   teams: PropTypes.array,
   team: PropTypes.object
 }
-
-export default Sidebar

@@ -5,6 +5,8 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { compose, graphql } from 'react-apollo'
 import findIndex from 'lodash/findIndex'
+// import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import { allTeamsQuery } from '../graphql/team'
 
@@ -97,27 +99,34 @@ const onUpdate = (teamId, store, { data: { createChannel } }) => {
 
     data.allTeams[teamIdx].channels.push(channel)
     store.writeQuery({ query: allTeamsQuery, data })
+
+    return channel.id
+
+    // return (<Redirect to={`/view-team/${teamId}/${channel.id}`} />)
 }
 
-const onHandleSubmit = async (values, { props: { onClose, teamId, mutate }, setSubmitting }) => {
+const onHandleSubmit = async (values, { props: { onClose, teamId, mutate, history }, setSubmitting }) => {
+    let channelId = ""
     await mutate({
         variables: { teamId, name: values.name },
         optimisticResponse: channelOptomisticResponse(values),
         update: (store, { data: { createChannel } }) => {
-            onUpdate(teamId, store, { data: { createChannel } })
+            channelId = onUpdate(teamId, store, { data: { createChannel } })
         }
     })
     onClose() // Formik func - close form
     setSubmitting(false)
+    history.push(`/view-team/${teamId}/${channelId}`)
 }
 
 
 export default compose(
     graphql(createChannelMutation), // 'mutate' func passed in by GraphQL
+    withRouter,
     withFormik({
         mapPropsToValues: () => ({ name: '' }), // setSubmitting from Formik HOC - sets isSubmitting prop
-        handleSubmit: async (values, { props: { onClose, teamId, mutate }, setSubmitting }) => {
-            onHandleSubmit(values, { props: { onClose, teamId, mutate }, setSubmitting })
+        handleSubmit: async (values, { props: { onClose, teamId, mutate, history }, setSubmitting }) => {
+            onHandleSubmit(values, { props: { onClose, teamId, mutate, history }, setSubmitting })
         },
     }),
 )(AddChannelModal)

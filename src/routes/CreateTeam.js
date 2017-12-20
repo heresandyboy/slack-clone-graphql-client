@@ -74,7 +74,7 @@ class CreateTeam extends Component {
           <Button onClick={this.onSubmit}>Submit</Button>
         </Form>
         {errorList.length ? (
-          <Message error header="There was some errors with your submission" list={errorList} />
+          <Message error header="There are some errors with your submission" list={errorList} />
         ) : null}
       </Container>
     )

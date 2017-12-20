@@ -36,7 +36,7 @@ class Register extends Component {
         const { ok, errors } = response.data.register
 
         if (ok) {
-            this.props.history.push('/')
+            this.props.history.push('/view-team')
         } else {
             const validationError = {}
             errors.forEach(({ path, message }) => {

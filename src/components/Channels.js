@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { Icon } from 'semantic-ui-react' 
+import { Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 const ChannelWrapper = styled.div`
@@ -43,10 +43,10 @@ Bubble.propTypes = {
     on: PropTypes.bool
 }
 
-const channel = ({ id, name }, teamId) => 
-<Link key={`link-channel-${id}`} to={`/view-team/${teamId}/${id}`}>
-<SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
-</Link>
+const channel = ({ id, name }, teamId) =>
+    <Link key={`link-channel-${id}`} to={`/view-team/${teamId}/${id}`}>
+        <SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
+    </Link>
 channel.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string
@@ -63,7 +63,13 @@ user.propTypes = {
 }
 
 const Channels = ({
-  teamName, username, teamId, channels, users, onAddChannelClick
+  teamName, 
+  username, 
+  teamId, 
+  channels, 
+  users, 
+  onAddChannelClick,
+  onInvitePeopleClick
 }) => (
         <ChannelWrapper>
             <PushLeft>
@@ -82,6 +88,11 @@ const Channels = ({
                     {users.map(user)}
                 </SideBarList>
             </div>
+            <div>
+                <a href="#invite-people" onClick={ onInvitePeopleClick } >
+                    + Invite People
+                </a>
+            </div>
         </ChannelWrapper>
     )
 Channels.propTypes = {
@@ -90,7 +101,8 @@ Channels.propTypes = {
     teamId: PropTypes.number,
     channels: PropTypes.array,
     users: PropTypes.array,
-    onAddChannelClick: PropTypes.func
+    onAddChannelClick: PropTypes.func,
+    onInvitePeopleClick: PropTypes.func
 }
 
 
