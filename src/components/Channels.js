@@ -1,5 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { Icon } from 'semantic-ui-react' 
+import { Link } from 'react-router-dom'
 
 const ChannelWrapper = styled.div`
   grid-column: 2;
@@ -36,17 +39,31 @@ const PushLeft = styled.div`${paddingLeft};`
 const Green = styled.span`color: #38978d;`
 
 const Bubble = ({ on = true }) => (on ? <Green>●</Green> : '○')
+Bubble.propTypes = {
+    on: PropTypes.bool
+}
 
-const channel = ({ id, name }) => <SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
+const channel = ({ id, name }, teamId) => 
+<Link key={`link-channel-${id}`} to={`/view-team/${teamId}/${id}`}>
+<SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
+</Link>
+channel.propTypes = {
+    id: PropTypes.number,
+    name: PropTypes.string
+}
 
 const user = ({ id, name }) => (
     <SideBarListItem key={`user-${id}`}>
         <Bubble /> {name}
     </SideBarListItem>
 )
+user.propTypes = {
+    id: PropTypes.number,
+    name: PropTypes.string
+}
 
-export default ({
-  teamName, username, channels, users,
+const Channels = ({
+  teamName, username, teamId, channels, users, onAddChannelClick
 }) => (
         <ChannelWrapper>
             <PushLeft>
@@ -55,8 +72,8 @@ export default ({
             </PushLeft>
             <div>
                 <SideBarList>
-                    <SideBarListHeader>Channels</SideBarListHeader>
-                    {channels.map(channel)}
+                    <SideBarListHeader>Channels <Icon onClick={onAddChannelClick} name="add circle"></Icon></SideBarListHeader>
+                    {channels.map((c) => channel(c, teamId))}
                 </SideBarList>
             </div>
             <div>
@@ -67,3 +84,14 @@ export default ({
             </div>
         </ChannelWrapper>
     )
+Channels.propTypes = {
+    teamName: PropTypes.string,
+    username: PropTypes.string,
+    teamId: PropTypes.number,
+    channels: PropTypes.array,
+    users: PropTypes.array,
+    onAddChannelClick: PropTypes.func
+}
+
+
+export default Channels
