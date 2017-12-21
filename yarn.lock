@@ -245,7 +245,7 @@ apollo-link@^1.0.0, apollo-link@^1.0.6:
     apollo-utilities "^1.0.0"
     zen-observable "^0.6.0"
 
-apollo-utilities@^1.0.0, apollo-utilities@^1.0.3:
+apollo-utilities@^1.0.0, apollo-utilities@^1.0.1, apollo-utilities@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.3.tgz#bf435277609850dd442cf1d5c2e8bc6655eaa943"
 
@@ -1973,6 +1973,10 @@ depd@1.1.1, depd@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
 
+deprecated-decorator@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/deprecated-decorator/-/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
+
 des.js@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/des.js/-/des.js-1.0.0.tgz#c074d2e2aa6a8a9a07dbd61f9a15c2cd83ec8ecc"
@@ -3072,9 +3076,17 @@ graphql-tag@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.6.0.tgz#0fb1b9f6d6651263c47a3420e827910e6fed3952"
 
-graphql@^0.11.7:
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.11.7.tgz#e5abaa9cb7b7cccb84e9f0836bf4370d268750c6"
+graphql-tools@^2.14.1:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.14.1.tgz#15f96683d7f178042baddcfc17d73dcfeee67356"
+  dependencies:
+    apollo-utilities "^1.0.1"
+    deprecated-decorator "^0.1.6"
+    uuid "^3.1.0"
+
+graphql@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.12.3.tgz#11668458bbe28261c0dcb6e265f515ba79f6ce07"
   dependencies:
     iterall "1.1.3"
 

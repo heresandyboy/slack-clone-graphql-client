@@ -45,7 +45,7 @@ PrivateRoute.propTypes = {
 export default () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={Home} />
+      <PrivateRoute path="/" exact component={Home} />
       <Route path="/register" exact component={Register} />
       <Route path="/login" exact component={Login} />
       <PrivateRoute path="/view-team/:teamId?/:channelId?" exact component={ViewTeam} />

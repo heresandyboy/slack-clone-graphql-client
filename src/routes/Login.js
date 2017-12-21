@@ -10,7 +10,7 @@ import { Message, Form, Button, Input, Container, Header } from 'semantic-ui-rea
     This component is trying out Mobx
     (an alternative to Redux for some component state management)
     Though this could also be achieved with Apollo's global state
- */
+*/
 
 class Login extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Login extends Component {
       if (ok) {
         localStorage.setItem('token', token)
         localStorage.setItem('refreshToken', refreshToken)
-        this.props.history.push('/')
+        this.props.history.push('/view-team')
       } else {
         const err = {}
         errors.forEach(({ path, message }) => {

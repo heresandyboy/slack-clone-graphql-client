@@ -63,37 +63,42 @@ user.propTypes = {
 }
 
 const Channels = ({
-  teamName, 
-  username, 
-  teamId, 
-  channels, 
-  users, 
-  onAddChannelClick,
-  onInvitePeopleClick
-}) => (
-        <ChannelWrapper>
-            <PushLeft>
-                <TeamNameHeader>{teamName}</TeamNameHeader>
-                {username}
-            </PushLeft>
-            <div>
-                <SideBarList>
-                    <SideBarListHeader>Channels <Icon onClick={onAddChannelClick} name="add circle"></Icon></SideBarListHeader>
-                    {channels.map((c) => channel(c, teamId))}
-                </SideBarList>
-            </div>
-            <div>
-                <SideBarList>
-                    <SideBarListHeader>Direct Messages</SideBarListHeader>
-                    {users.map(user)}
-                </SideBarList>
-            </div>
-            <div>
-                <a href="#invite-people" onClick={ onInvitePeopleClick } >
-                    + Invite People
-                </a>
-            </div>
-        </ChannelWrapper>
+    teamName,
+    username,
+    channels,
+    users,
+    onAddChannelClick,
+    teamId,
+    onInvitePeopleClick,
+    isOwner,
+  }) => (
+    <ChannelWrapper>
+      <PushLeft>
+        <TeamNameHeader>{teamName}</TeamNameHeader>
+        {username}
+      </PushLeft>
+      <div>
+        <SideBarList>
+          <SideBarListHeader>
+            Channels {isOwner && <Icon onClick={onAddChannelClick} name="add circle" />}
+          </SideBarListHeader>
+          {channels.map(c => channel(c, teamId))}
+        </SideBarList>
+      </div>
+      <div>
+        <SideBarList>
+          <SideBarListHeader>Direct Messages</SideBarListHeader>
+          {users.map(user)}
+        </SideBarList>
+      </div>
+      {isOwner && (
+        <div>
+          <a href="#invite-people" onClick={onInvitePeopleClick}>
+            + Invite People
+          </a>
+        </div>
+      )}
+    </ChannelWrapper>
     )
 Channels.propTypes = {
     teamName: PropTypes.string,
@@ -102,7 +107,8 @@ Channels.propTypes = {
     channels: PropTypes.array,
     users: PropTypes.array,
     onAddChannelClick: PropTypes.func,
-    onInvitePeopleClick: PropTypes.func
+    onInvitePeopleClick: PropTypes.func,
+    isOwner: PropTypes.bool
 }
 
 
